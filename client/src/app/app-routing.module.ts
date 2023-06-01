@@ -1,8 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
+import { SigninComponent } from './signin/signin.component';
+import { MilestoneFormComponent } from './milestone-form/milestone-form.component';
 
-const routes: Routes = [{ path: '', component: HomeComponent }];
+const routes: Routes = [
+  { path: '', component: HomeComponent },
+  { path: 'signin', component: SigninComponent },
+  { path: 'milestone', component: MilestoneFormComponent },
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
