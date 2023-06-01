@@ -1,0 +1,43 @@
+<!-- campaign.component.html -->
+
+<h2 class="text-center text-3xl mt-8 mb-8">Create Campaign</h2>
+<form (ngSubmit)="submitForm()" class="w-1/2 mx-auto">
+  <div class="mb-4">
+    <label for="name" class="block">Name:</label>
+    <input type="text" class="input" id="name" name="name">
+  </div>
+  <div class="mb-4">
+    <label for="email" class="block">UserId:</label>
+    <input type="text" class="input" id="userid" name="userid">
+  </div>
+  <div class="mb-4">
+    <label for="sdate" class="block">Start Date:</label>
+    <input type="date" class="input" id="sdate" name="start_date">
+  </div>
+  <div class="mb-4">
+    <label for="edate" class="block">End Date:</label>
+    <input type="date" class="input" id="edate" name="end_date">
+  </div>
+  <div class="mb-4">
+    <label for="progress" class="block">Progress:</label>
+    <input type="text" class="input" id="progress" name="progress">
+  </div>
+  <div class="mb-4">
+    <label for="identity" class="block">Link Identifier:</label>
+    <input type="text" class="input" id="identity" name="link_identity">
+  </div>
+  <div class="mb-4">
+    <label for="desc" class="block">Description:</label>
+    <input type="text" class="input" id="desc" name="description">
+  </div>
+  <div class="mb-4">
+    <label for="cphoto" class="block">Cover Photo:</label>
+    <input type="text" class="input" id="cphoto" name="cover_photo">
+  </div>
+  <div class="mb-4">
+    <label for="status" class="block">Status:</label>
+    <input type="text" class="input" id="status" name="status">
+  </div>
+  <button type="submit" class="btn btn-primary">Create</button>
+  <button type="submit" class="btn btn-primary">Edit</button>
+</form>

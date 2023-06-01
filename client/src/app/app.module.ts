@@ -8,6 +8,7 @@ import { HomeComponent } from './home/home.component';
 import { SigninComponent } from './signin/signin.component';
 import { MilestoneFormComponent } from './milestone-form/milestone-form.component';
 import { SignupComponent } from './signup/signup.component';
+import { CampaignComponent } from './campaign/campaign.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { SignupComponent } from './signup/signup.component';
     SigninComponent,
     MilestoneFormComponent,
     SignupComponent,
+    CampaignComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [],
