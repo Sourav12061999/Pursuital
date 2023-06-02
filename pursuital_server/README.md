@@ -25,7 +25,7 @@
 
 ## APIs:-
 
-- `/api/accounts/signup/`(POST):- Signup
+- `/api/signup/`(POST):- Signup
   Send the following data in the body:-
   ```
   {
@@ -35,7 +35,7 @@
   "role": "user"
   }
   ```
-- `/api/accounts/signin/`(POST):- Signin
+- `/api/signin/`(POST):- Signin
   Send the following data in the body:-
   ```
   {
@@ -43,7 +43,10 @@
   "password": "password123"
   }
   ```
-- `api/accounts/user/`(POST):- Get User Details
+*** Other than signup and signin all apis will be authenticated ***
+- `api/user/`(POST):- Get User Details
   1. In the Header put a key called `Authorization`
   2. The value will be `Token <Your Token the you get after signin>`
   3. `<Your Token the you get after signin>` make sure to replace this part with the acctual token
+
+- ``
