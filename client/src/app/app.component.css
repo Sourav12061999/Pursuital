@@ -235,12 +235,35 @@ nav{
       color: white;
   }
   .row{
-    border: 1px solid red;
-    display: flex;
+    /* border: 1px solid red; */
+    /* display: flex; */
   }
   .mt-5{
-    border: 1px solid red;
+    /* border: 1px solid red; */
+    
   }
 
 
+.row-div{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    /* border: 1px solid brown; */
+    width: 90%;
+    margin: 50px auto;
+}
+.row-div img{
+    width: 1500px;
+}
+.row-div p{
+    width: 500px;
+    letter-spacing: 1px;
+}
 
+
+.fixed-bottom{
+    position: fixed;
+	bottom: 0px;
+	left: 0px;
+    width: 100%;
+}
