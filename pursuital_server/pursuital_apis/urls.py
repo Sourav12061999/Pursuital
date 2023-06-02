@@ -12,7 +12,7 @@ urlpatterns = [
     path('campaigns/create/', CampaignCreateAPIView.as_view(), name="campaign-create"),
     path('campaigns/list/', CampaignListAPIView.as_view(), name="campaign-list"),
     path('campaigns/update/<int:campaign_id>', CampaignUpdateAPIView.as_view(), name="campaign-update"),
-    path('campaigns/delete/', CampaignDeleteAPIView.as_view(), name="campaign-delete"),
+    path('campaigns/delete/<int:campaign_id>', CampaignDeleteAPIView.as_view(), name="campaign-delete"),
     # CampaignUser routes
     path('campaigns-users/create/', CampaignUserCreateAPIView.as_view(), name="campaign-user-create"),
     path('campaigns-users/list/', CampaignUserListAPIView.as_view(), name="campaign-user-list"),

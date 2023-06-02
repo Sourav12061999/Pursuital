@@ -133,13 +133,19 @@ class CampaignUpdateAPIView(generics.UpdateAPIView):
 class CampaignDeleteAPIView(generics.DestroyAPIView):
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
+    queryset = Campaign.objects.all()
+    serializer_class = CampaignSerializer
 
     def delete(self, request, *args, **kwargs):
         user = request.user
         if user.role != "admin":
             return Response("Unauthorized", status=status.HTTP_403_FORBIDDEN)
-        return self.destroy(request, *args, **kwargs)
 
+        campaign_id = kwargs.get('campaign_id')
+        campaign = self.get_object()
+        # Perform any additional checks or actions before deleting the campaign
+
+        return self.destroy(request, *args, **kwargs)
 
 ## Campaign User
 class CampaignUserCreateAPIView(APIView):
