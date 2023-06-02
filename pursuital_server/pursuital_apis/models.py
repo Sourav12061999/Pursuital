@@ -36,7 +36,7 @@ class User(AbstractBaseUser):
     REQUIRED_FIELDS = ['name', 'role', "batch", "student_id", ]
 
     def __str__(self):
-        return self
+        return f'id: {self.id}, name: {self.name}, email: {self.email}, role: {self.role} ,batch: {self.batch}, student_id: {self.student_id}'
 
 class Campaign(models.Model):
     name = models.CharField(max_length=255)
@@ -48,7 +48,7 @@ class Campaign(models.Model):
     cover_photo = models.CharField(max_length=255)
     status = models.CharField(max_length=100)
     def __str__(self):
-        return self
+        return f'id: {self.id}, start_date: {self.start_date}, end_date: {self.end_date},progress: {self.progress}, link_identifier: {self.link_identifier}, description: {self.description}, cover_photo: {self.cover_photo}, status: {self.status}'
 
 class CampaignUser(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -56,30 +56,30 @@ class CampaignUser(models.Model):
     enrollment_date = models.DateField()
     status = models.CharField(max_length=100)
     def __str__(self):
-        return self
+        return f'id: {self.id}, user: {self.user}, campaign: {self.campaign} , enrollment_date: {self.enrollment_date}, status: {self.status}'
 class Goal(models.Model):
     title = models.CharField(max_length=255)
     date = models.DateField()
     type = models.CharField(max_length=255)
     def __str__(self):
-        return self
+        return f'id: {self.id}, title: {self.title}, date:{self.date}, type: {self.type}'
 class GoalUser(models.Model):
     campaign_user = models.ForeignKey(CampaignUser, on_delete=models.CASCADE)
     goal = models.ForeignKey(Goal, on_delete=models.CASCADE)
     submission = models.TextField()
 
     def __str__(self):
-        return self
+        return f'id:{self.id}, campaign_user: {self.campaign_user}. goal:{self.goal}, submission: {self.submission}'
 class Milestone(models.Model):
     name = models.CharField(max_length=255)
     goal_count = models.IntegerField()
 
     def __str__(self):
-        return self
+        return f'id: {self.id}, name: {self,name}, goal_count: {self.goal_count}'
 
 class MilestoneUser(models.Model):
     milestone = models.ForeignKey(Milestone, on_delete=models.CASCADE)
     campaign_user = models.ForeignKey(CampaignUser, on_delete=models.CASCADE)
     achievement_date = models.DateField()
     def __str__(self):
-        return self
+        return f'id:{self.id}, milestone: {self.milestone}, campaign_user: {self.campaign_user},achievement_date: {self.achievement_date}'
