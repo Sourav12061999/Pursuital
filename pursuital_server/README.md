@@ -59,4 +59,6 @@
 - `api/campaigns/update/:id`(PUT):- Update the Campaign with the id
 - `api/campaigns/delete/:id`(Delete):- Delete a campaign
 #### CampaignUser:-
-
+- `api/campaigns-users/create`(POST):- Create a new Campaign User
+- `api/campaigns-users/list/<int:campaign_id>/`(GET) -> Get all the Campaign Users of a perticular campaign
+- `api/campaigns-users/delete/<int:user_id>/<int:campaign_id>/`(Delete):- Delete a CampaignUser which is of a User and belongs to a Campaign

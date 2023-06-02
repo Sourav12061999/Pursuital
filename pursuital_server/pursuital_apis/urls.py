@@ -13,10 +13,11 @@ urlpatterns = [
     path('campaigns/list/', CampaignListAPIView.as_view(), name="campaign-list"),
     path('campaigns/update/<int:campaign_id>', CampaignUpdateAPIView.as_view(), name="campaign-update"),
     path('campaigns/delete/<int:campaign_id>', CampaignDeleteAPIView.as_view(), name="campaign-delete"),
+    
     # CampaignUser routes
     path('campaigns-users/create/', CampaignUserCreateAPIView.as_view(), name="campaign-user-create"),
-    path('campaigns-users/list/', CampaignUserListAPIView.as_view(), name="campaign-user-list"),
-    path('campaigns-users/delete/', CampaignUserDeleteAPIView.as_view(), name="campaign-user-delete"),
+    path('campaigns-users/list/<int:campaign_id>/', CampaignUserListAPIView.as_view(), name="campaign-user-list"),
+    path('campaigns-users/delete/<int:user_id>/<int:campaign_id>/', CampaignUserDeleteAPIView.as_view(), name="campaign-user-delete"),
 
     # Goal routes
     path('goals/create/', GoalCreateAPIView.as_view(), name="goals-create"),

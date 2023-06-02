@@ -164,20 +164,25 @@ class CampaignUserCreateAPIView(APIView):
         
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
 class CampaignUserListAPIView(generics.ListAPIView):
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
-    queryset = CampaignUser.objects.all()
     serializer_class = CampaignUserSerializer
 
     def list(self, request, *args, **kwargs):
         user = request.user
+        campaign_id = self.kwargs.get('campaign_id')
+        
         if user.role != "admin":
             return Response("Unauthorized", status=status.HTTP_403_FORBIDDEN)
-        return super().list(request, *args, **kwargs)
+        
+        if campaign_id:
+            queryset = CampaignUser.objects.filter(campaign_id=campaign_id)
+        else:
+            queryset = CampaignUser.objects.all()
 
-
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data)
 
 class CampaignUserDeleteAPIView(generics.DestroyAPIView):
     authentication_classes = [TokenAuthentication]
@@ -187,8 +192,17 @@ class CampaignUserDeleteAPIView(generics.DestroyAPIView):
         user = request.user
         if user.role != "admin":
             return Response("Unauthorized", status=status.HTTP_403_FORBIDDEN)
-        return self.destroy(request, *args, **kwargs)
 
+        user_id = self.kwargs.get('user_id')
+        campaign_id = self.kwargs.get('campaign_id')
+
+        try:
+            campaign_user = CampaignUser.objects.get(user_id=user_id, campaign_id=campaign_id)
+        except CampaignUser.DoesNotExist:
+            return Response("CampaignUser not found", status=status.HTTP_404_NOT_FOUND)
+
+        self.perform_destroy(campaign_user)
+        return Response(status=status.HTTP_204_NO_CONTENT)
 ## Goals
 class GoalCreateAPIView(APIView):
     authentication_classes = [TokenAuthentication]
