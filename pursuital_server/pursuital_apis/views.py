@@ -8,6 +8,7 @@ from rest_framework.permissions import IsAuthenticated
 
 class SignupView(APIView):
     def post(self, request):
+        request.data["role"] = "student"
         serializer = UserSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
