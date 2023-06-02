@@ -58,4 +58,5 @@
 - `api/campaigns/list/`(POST):- Get all the Campaigns
 - `api/campaigns/update/:id`(PUT):- Update the Campaign with the id
 - `api/campaigns/delete/:id`(Delete):- Delete a campaign
-#### CampaignUser:- 
+#### CampaignUser:-
+

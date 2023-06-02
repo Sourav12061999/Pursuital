@@ -117,13 +117,19 @@ class CampaignListAPIView(generics.ListAPIView):
 class CampaignUpdateAPIView(generics.UpdateAPIView):
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
+    queryset = Campaign.objects.all()
+    serializer_class = CampaignSerializer
 
     def put(self, request, *args, **kwargs):
         user = request.user
         if user.role != "admin":
             return Response("Unauthorized", status=status.HTTP_403_FORBIDDEN)
-        return self.update(request, *args, **kwargs)
 
+        campaign_id = kwargs.get('campaign_id')
+        campaign = self.get_object()
+        # Update the campaign data
+
+        return self.update(request, *args, **kwargs)
 class CampaignDeleteAPIView(generics.DestroyAPIView):
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
