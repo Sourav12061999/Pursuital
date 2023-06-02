@@ -1,10 +1,13 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from .serializers import UserSerializer
+from .serializers import UserSerializer, BatchSerializer
+from .models import Batch
 from rest_framework.authtoken.models import Token
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
+from django.contrib.auth import authenticate
+from rest_framework.authtoken.models import Token
 
 class SignupView(APIView):
     def post(self, request):
@@ -15,8 +18,7 @@ class SignupView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-from django.contrib.auth import authenticate
-from rest_framework.authtoken.models import Token
+
 
 class SigninView(APIView):
     def post(self, request):
@@ -33,8 +35,7 @@ class SigninView(APIView):
         else:
             return Response({'error': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
 
-from rest_framework.authentication import TokenAuthentication
-from rest_framework.permissions import IsAuthenticated
+
 
 class UserDetailView(APIView):
     authentication_classes = [TokenAuthentication]
@@ -51,3 +52,26 @@ class UserDetailView(APIView):
             'role': user.role
         }
         return Response(user_data, status=status.HTTP_200_OK)
+
+class BatchListAPIView(generics.ListAPIView):
+    queryset = Batch.objects.all()
+    serializer_class = BatchSerializer
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.get_queryset()
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data)
+
+
+class BatchCreateAPIView(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+    def post(self, request):
+        user = request.user
+        if user.role != "admin":
+            return Response("Unauthorized", status=status.HTTP_403_FORBIDDEN)
+        serializer = BatchSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
