@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "pursuital-client": {
+    "my-angular-app": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/pursuital-client",
+            "outputPath": "dist/my-angular-app",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -60,10 +60,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "pursuital-client:build:production"
+              "browserTarget": "my-angular-app:build:production"
             },
             "development": {
-              "browserTarget": "pursuital-client:build:development"
+              "browserTarget": "my-angular-app:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -71,7 +71,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "pursuital-client:build"
+            "browserTarget": "my-angular-app:build"
           }
         },
         "test": {
@@ -96,6 +96,6 @@
     }
   },
   "cli": {
-    "analytics": "98defa89-a8c9-42d7-a4bb-3a230ed8619c"
+    "analytics": false
   }
 }
