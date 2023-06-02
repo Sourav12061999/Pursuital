@@ -13,18 +13,15 @@ urlpatterns = [
     path('campaigns/list/', CampaignListAPIView.as_view(), name="campaign-list"),
     path('campaigns/update/<int:campaign_id>', CampaignUpdateAPIView.as_view(), name="campaign-update"),
     path('campaigns/delete/<int:campaign_id>', CampaignDeleteAPIView.as_view(), name="campaign-delete"),
-    
+
     # CampaignUser routes
     path('campaigns-users/create/', CampaignUserCreateAPIView.as_view(), name="campaign-user-create"),
     path('campaigns-users/list/<int:campaign_id>/', CampaignUserListAPIView.as_view(), name="campaign-user-list"),
     path('campaigns-users/delete/<int:user_id>/<int:campaign_id>/', CampaignUserDeleteAPIView.as_view(), name="campaign-user-delete"),
 
     # Goal routes
-    path('goals/create/', GoalCreateAPIView.as_view(), name="goals-create"),
-    path('goals/list/', GoalListAPIView.as_view(), name="goals-list"),
-    path('goals/update/', GoalUpdateAPIView.as_view(), name="goals-update"),
-    path('goals/delete/', GoalDeleteAPIView.as_view(), name="goals-delete"),
-
+    path('goals/create/<int:campaign_id>/', GoalCreateAPIView.as_view(), name="goals-create"),
+    path('goals/list/<int:goal_id>/', GoalListAPIView.as_view(), name="goals-list"),
     # GoalUser routes
     path('goals-users/create/', GoalUserCreateAPIView.as_view(), name="goal-user-create"),
     path('goals-users/list/', GoalUserListAPIView.as_view(), name="goal-user-list"),

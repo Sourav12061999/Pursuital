@@ -208,50 +208,32 @@ class GoalCreateAPIView(APIView):
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
     
-    def post(self, request):
+    def post(self, request, campaign_id):
         user = request.user
         if user.role != "admin":
             return Response("Unauthorized", status=status.HTTP_403_FORBIDDEN)
         
         serializer = GoalSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save()
+            serializer.save(campaign_id=campaign_id)  # Set the campaign ID in the serializer data
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
 class GoalListAPIView(generics.ListAPIView):
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
-    queryset = Goal.objects.all()
     serializer_class = GoalSerializer
 
+    def get_queryset(self):
+        goal_id = self.kwargs.get('goal_id')
+        queryset = Goal.objects.filter(id=goal_id)
+        return queryset
+
     def list(self, request, *args, **kwargs):
-        user = request.user
-        return super().list(request, *args, **kwargs)
-
-
-class GoalUpdateAPIView(generics.UpdateAPIView):
-    authentication_classes = [TokenAuthentication]
-    permission_classes = [IsAuthenticated]
-
-    def put(self, request, *args, **kwargs):
-        user = request.user
-        if user.role != "admin" or user.role != "student":
-            return Response("Unauthorized", status=status.HTTP_403_FORBIDDEN)
-        return self.update(request, *args, **kwargs)
-
-
-class GoalDeleteAPIView(generics.DestroyAPIView):
-    authentication_classes = [TokenAuthentication]
-    permission_classes = [IsAuthenticated]
-
-    def delete(self, request, *args, **kwargs):
-        user = request.user
-        if user.role != "admin":
-            return Response("Unauthorized", status=status.HTTP_403_FORBIDDEN)
-        return self.destroy(request, *args, **kwargs)
+        queryset = self.get_queryset()
+        serializer = self.serializer_class(queryset, many=True)
+        return self.get_paginated_response(serializer.data) if self.paginate_queryset(queryset) else Response(serializer.data)
 
 
 ## GoalUser
