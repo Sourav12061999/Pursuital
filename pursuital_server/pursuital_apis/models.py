@@ -4,7 +4,7 @@ class Batch(models.Model):
     name = models.CharField(max_length=255)#name will be web or and or da
     type = models.CharField(max_length=255) # Type will be either FT or PT
     def __str__(self):
-        return self.name
+        return f'id:{self.id}, name: {self.name} type: {self.type}'
 
 class UserManager(BaseUserManager):
     def create_user(self, email, password=None, **extra_fields):
@@ -36,7 +36,7 @@ class User(AbstractBaseUser):
     REQUIRED_FIELDS = ['name', 'role', "batch", "student_id", ]
 
     def __str__(self):
-        return self.email
+        return self
 
 class Campaign(models.Model):
     name = models.CharField(max_length=255)
@@ -48,7 +48,7 @@ class Campaign(models.Model):
     cover_photo = models.CharField(max_length=255)
     status = models.CharField(max_length=100)
     def __str__(self):
-        return self.name
+        return self
 
 class CampaignUser(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -56,30 +56,30 @@ class CampaignUser(models.Model):
     enrollment_date = models.DateField()
     status = models.CharField(max_length=100)
     def __str__(self):
-        return f"{self.user.username} - {self.campaign.name}"
+        return self
 class Goal(models.Model):
     title = models.CharField(max_length=255)
     date = models.DateField()
     type = models.CharField(max_length=255)
     def __str__(self):
-        return self.title
+        return self
 class GoalUser(models.Model):
     campaign_user = models.ForeignKey(CampaignUser, on_delete=models.CASCADE)
     goal = models.ForeignKey(Goal, on_delete=models.CASCADE)
     submission = models.TextField()
 
     def __str__(self):
-        return f"{self.campaign_user} - {self.goal}"
+        return self
 class Milestone(models.Model):
     name = models.CharField(max_length=255)
     goal_count = models.IntegerField()
 
     def __str__(self):
-        return self.name
+        return self
 
 class MilestoneUser(models.Model):
     milestone = models.ForeignKey(Milestone, on_delete=models.CASCADE)
     campaign_user = models.ForeignKey(CampaignUser, on_delete=models.CASCADE)
     achievement_date = models.DateField()
     def __str__(self):
-        return f"{self.milestone} - {self.campaign_user}"
+        return self
