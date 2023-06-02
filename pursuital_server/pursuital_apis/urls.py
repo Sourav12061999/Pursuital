@@ -1,14 +1,10 @@
-from django.urls import path, include
-from pursuital_apis.views import UserCreateAPIView, UserDetailAPIView
+from django.urls import path
+from .views import SignupView, SigninView
+from .views import UserDetailView
+
 
 urlpatterns = [
-    path(
-        "api/accounts/",
-        include(
-            [
-                path("signup/", UserCreateAPIView.as_view(), name="signup"),
-                path("user/<int:pk>/", UserDetailAPIView.as_view(), name="user-detail"),
-            ]
-        ),
-    ),
+    path('signup/', SignupView.as_view(), name='signup'),
+    path('signin/', SigninView.as_view(), name='signin'),
+    path('user/', UserDetailView.as_view(), name='user-detail')
 ]

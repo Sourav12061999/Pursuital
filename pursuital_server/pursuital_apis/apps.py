@@ -2,5 +2,5 @@ from django.apps import AppConfig
 
 
 class PursuitalApisConfig(AppConfig):
-    default_auto_field = "django.db.models.BigAutoField"
-    name = "pursuital_apis"
+    default_auto_field = 'django.db.models.BigAutoField'
+    name = 'pursuital_apis'
