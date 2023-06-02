@@ -9,6 +9,9 @@ import { SigninComponent } from './signin/signin.component';
 import { MilestoneFormComponent } from './milestone-form/milestone-form.component';
 import { SignupComponent } from './signup/signup.component';
 import { CampaignComponent } from './campaign/campaign.component';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
+
 
 @NgModule({
   declarations: [
@@ -18,6 +21,8 @@ import { CampaignComponent } from './campaign/campaign.component';
     MilestoneFormComponent,
     SignupComponent,
     CampaignComponent,
+    HeaderComponent,
+    FooterComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [],

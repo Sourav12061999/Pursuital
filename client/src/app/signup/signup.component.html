@@ -1,9 +1,139 @@
-<h1 class="text-center text-blue-500 text-4xl mt-8 mb-8">Sign Up Page</h1>
+<!-- <h1 class="text-center text-blue-500 text-4xl mt-8 mb-8">Sign Up Page</h1> -->
 
-<form (ngSubmit)="submitForm()" class="flex flex-col w-1/3 mx-auto bg-white shadow rounded-lg p-8 mb-8">
-  <input type="text" name="name" placeholder="Name" class="input mb-2">
+<form (ngSubmit)="submitForm()" style="width:40%" class="flex flex-col w-1/3 mx-auto bg-white shadow rounded-lg p-8 mb-8">
+  <!-- <label for="name">Student Name<span class="required-field">*</span></label> -->
+  <!-- <input type="text" name="name" placeholder="Name" class="input mb-2"> -->
+  <!-- <br>
+  <input type="text" class="border border-gray-300 rounded-md p-2 focus:outline-none focus:border-blue-500" name="name" id="name" placeholder="Enter full name" required minlength="4">
+
   <input type="text" name="email" placeholder="Email" class="input mb-2">
   <input type="password" name="password" placeholder="Password" class="input mb-2">
   <input type="text" name="role" placeholder="Role" class="input mb-2">
-  <button type="submit" class="button bg-blue-500 text-white py-4 px-8 mt-4 mx-auto rounded-lg">Sign Up</button>
+  <button type="submit" class="button bg-blue-500 text-white py-4 px-8 mt-4 mx-auto rounded-lg">Sign Up</button> -->
+  <div class="justify-content-center text-center py-4">
+    <h2 class="text-2xl">Sign up</h2>
+  </div>
+  <div  class="form-group">
+    <label for="name" class="block">Student Name<span class="required-field">*</span></label>
+    <input type="text" style="width:100%" class="form-control border border-gray-300 rounded-md p-2 focus:outline-none focus:border-blue-500" name="name" id="name" placeholder="Enter full name" required minlength="4"><br>
+    <small class="form-text text-muted">Name should be at least 4 characters long.</small>
+  </div>
+  <br>
+  <div class="form-group">
+    <label for="role" class="block">Role</label>
+    <input type="text" class="form-control border border-gray-300 rounded-md p-2 focus:outline-none focus:border-blue-500" style="width:100%" name="role" id="role" placeholder="Enter role" required>
+  </div>
+  <br>
+  <div class="btn-group mt-2">
+    <label for="batch" class="block" style="margin-right: 10px;">Batch:<span class="required-field">*</span></label>
+    <select id="batch" name="batch" class="form-control border border-gray-300 rounded-md p-2 focus:outline-none focus:border-blue-500" required>
+      <option value="">None</option>
+      <option value="FT-WEB-19">FT-WEB-19</option>
+      <option value="FT-WEB-20">FT-WEB-20</option>
+      <option value="FT-WEB-21">FT-WEB-21</option>
+    </select>
+  </div>
+  <br>
+  <div class="form-group mt-3">
+    <label for="studentId" class="block">Student ID<span class="required-field">*</span></label>
+    <input type="text" style="width:100%" class="form-control border border-gray-300 rounded-md p-2 focus:outline-none focus:border-blue-500" name="studentId" id="studentId" placeholder="Enter student ID" required minlength="3"><br>
+    <small class="form-text text-muted">Student Id should be at least 3 characters long.</small>
+  </div>
+  <br>
+  <div class="form-group">
+    <label for="email" class="block">Email<span class="required-field">*</span></label>
+    <input type="email" style="width:100%" class="form-control border border-gray-300 rounded-md p-2 focus:outline-none focus:border-blue-500" name="email" id="email" placeholder="Enter email" required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}">
+    <small class="form-text text-muted">Please enter a valid email address.</small>
+  </div>
+  <br>
+  <div class="form-group">
+    <label for="password" class="block">Create Password<span class="required-field">*</span></label>
+    <input type="password" style="width:100%" class="form-control border border-gray-300 rounded-md p-2 focus:outline-none focus:border-blue-500" name="password" id="password" placeholder="Enter password" required minlength="8" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+]).{8,}$"><br>
+    <small class="form-text text-muted">Password should be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one digit, and one special character.</small>
+  </div>
+  <br>
+  <div class="form-group row">
+    <label for="profile_image" class="col-sm-4 col-form-label block">Profile Photo:<span class="required-field">*</span></label>
+    <div>
+      <input type="file" style="width:100%" class="form-control border border-gray-300 rounded-md p-2 focus:outline-none focus:border-blue-500" path="image" id="image" name="image" accept="image/*" required onchange="validateFileSize(this)">
+      <small class="form-text text-muted">Maximum file size: 5MB.</small>
+    </div>
+  </div>
+  <br>
+  <button type="submit" class="btn btn-custom-color btn-block">SignUp</button>
+  
+  <p style="margin-top: 5px;">Already have an account? <a href="./signin">Click here</a></p>
+  
+
+   
 </form>
+
+
+
+<!-- <section class="container my-5" style="margin-bottom: 200px;">
+  <div class="row justify-content-center">
+    <div class="col-lg-6">
+      <div class="card">
+        <div class="justify-content-center" style="text-align: center ;">
+          <h2>Sign Up</h2>
+        </div>
+        <div class="card-body">
+          <form class="form" role="form" autocomplete="off" action="/signup" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+              <label for="name">Student Name<span class="required-field">*</span></label>
+              <input type="text" class="form-control" name="name" id="name" placeholder="Enter full name" required minlength="4">
+              <small class="form-text text-muted">Name should be at least 4 characters long.</small>
+            </div>
+            <div class="form-group">
+              <label for="role">Role</label>
+              <input type="text" class="form-control" name="role" id="role" placeholder="Enter role" required>
+            </div>
+            
+            <div class="btn-group mt-2">
+              <label for="status-filter" style="margin-right: 10px; ">Batch:<span class="required-field">*</span></label>
+              <select id="batch" name="batch" class="form-control" required>
+              <option value="">None</option>
+              
+              <option value="FT-WEB-19">FT-WEB-19</option>
+                
+              <option value="FT-WEB-20">FT-WEB-20</option>
+                
+              <option value="FT-WEB-21">FT-WEB-21</option>
+                
+              </select>
+              </div>
+            
+            <div class="form-group mt-3">
+              <label for="studentId">Student ID<span class="required-field">*</span></label>
+              <input type="text" class="form-control" name="studentId" id="studentId" placeholder="Enter student ID" required minlength="3">
+              <small class="form-text text-muted">Student Id should be at least 3 characters long.</small>
+            </div>
+            <div class="form-group">
+              <label for="email">Email<span class="required-field">*</span></label>
+              <input type="email" class="form-control" name="email" id="email" placeholder="Enter email" required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}">
+              <small class="form-text text-muted">Please enter a valid email address.</small>
+              </div>
+              
+            <div class="form-group">
+              <label for="password">Create Password<span class="required-field">*</span></label>
+              <input type="password" class="form-control" name="password" id="password" placeholder="Enter password" required minlength="8" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+]).{8,}$">
+              <small class="form-text text-muted">Password should be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one digit, and one special character.</small>
+            </div>
+            <div class="form-group row">
+              <label for="profile_image" class="col-sm-4 col-form-label">Profile Photo:<span class="required-field">*</span></label>
+              <div>
+              <input type="file" class="form-control" path="image" id="image" name="image"  accept="image/*" required onchange="validateFileSize(this)">
+              <small class="form-text text-muted">Maximum file size: 5MB.</small>
+            </div>
+            </div>
+            <button type="submit" class="btn btn-custom-color btn-block">SignUp</button>
+            </form>
+            
+            
+          <P style="margin-top: 5px;"> Already have account ? <a href="/login">Click here</a></P>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</section> -->
