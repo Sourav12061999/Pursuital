@@ -19,10 +19,10 @@ urlpatterns = [
     path('campaigns-users/delete/', CampaignUserDeleteAPIView.as_view(), name="campaign-user-delete"),
 
     # Goal routes
-    path('goals/create/', GoalCreateAPIView.as_view(), name="goal-create"),
-    path('goals/list/', GoalListAPIView.as_view(), name="goal-list"),
-    path('goals/update/', GoalUpdateAPIView.as_view(), name="goal-update"),
-    path('goals/delete/', GoalDeleteAPIView.as_view(), name="goal-delete"),
+    path('goals/create/', GoalCreateAPIView.as_view(), name="goals-create"),
+    path('goals/list/', GoalListAPIView.as_view(), name="goals-list"),
+    path('goals/update/', GoalUpdateAPIView.as_view(), name="goals-update"),
+    path('goals/delete/', GoalDeleteAPIView.as_view(), name="goals-delete"),
 
     # GoalUser routes
     path('goals-users/create/', GoalUserCreateAPIView.as_view(), name="goal-user-create"),

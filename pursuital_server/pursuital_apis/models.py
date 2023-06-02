@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 class Batch(models.Model):
-    name = models.CharField(max_length=255)#name will be web or and or da
+    name = models.CharField(max_length=255)#name will be WEB or AND or DA
     type = models.CharField(max_length=255) # Type will be either FT or PT
     def __str__(self):
         return f'id:{self.id}, name: {self.name} type: {self.type}'

@@ -112,8 +112,6 @@ class CampaignListAPIView(generics.ListAPIView):
 
     def list(self, request, *args, **kwargs):
         user = request.user
-        if user.role != "admin" or user.role != "student":
-            return Response("Unauthorized", status=status.HTTP_403_FORBIDDEN)
         return super().list(request, *args, **kwargs)
 
 class CampaignUpdateAPIView(generics.UpdateAPIView):
@@ -205,8 +203,6 @@ class GoalListAPIView(generics.ListAPIView):
 
     def list(self, request, *args, **kwargs):
         user = request.user
-        if user.role != "admin" or user.role != "student":
-            return Response("Unauthorized", status=status.HTTP_403_FORBIDDEN)
         return super().list(request, *args, **kwargs)
 
 
@@ -271,10 +267,9 @@ class GoalUserListAPIView(generics.ListAPIView):
 
         return queryset
 
-    def list(self, request, *args, **kwargs):
+    def get(self, request, *args, **kwargs):
         user = request.user
-        if user.role != "admin":
-            return Response("Unauthorized", status=status.HTTP_403_FORBIDDEN)
+        print(user)
         return super().list(request, *args, **kwargs)
 
 
