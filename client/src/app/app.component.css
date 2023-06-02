@@ -1,0 +1,269 @@
+:root{
+    --blue: #007bff;
+    --indigo: #6610f2;
+    --purple: #6f42c1;
+    --pink: #e83e8c;
+    --red: #dc3545;
+    --orange: #fd7e14;
+    --yellow: #ffc107;
+    --green: #28a745;
+    --teal: #20c997;
+    --cyan: #17a2b8;
+    --white: #fff;
+    --gray: #6c757d;
+    --gray-dark: #343a40;
+    --primary: #007bff;
+    --secondary: #6c757d;
+    --success: #28a745;
+    --info: #17a2b8;
+    --warning: #ffc107;
+    --danger: #dc3545;
+    --light: #f8f9fa;
+    --dark: #343a40;
+    --breakpoint-xs: 0;
+    --breakpoint-sm: 576px;
+    --breakpoint-md: 768px;
+    --breakpoint-lg: 992px;
+    --breakpoint-xl: 1200px;
+    --font-family-sans-serif: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+    --font-family-monospace: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+}
+
+a {
+    color: #007bff;
+    text-decoration: none;
+    background-color: transparent;
+    -webkit-text-decoration-skip: objects;
+}
+.btn-custom-color {
+    font-size: large;
+    font-weight: 400;
+    font-family: 'Times New Roman', serif;
+    color: #111010;
+    border-color: #111010;
+    }
+.btn-custom-color:hover {
+    background-color: #314964;
+    color: #FFFFFF;
+    border-color: #FFFFFF;
+}
+
+nav{
+
+        /* Font & Text */
+        
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+        font-size: 16px;
+        font-style: normal;
+        font-variant: normal;
+        font-weight: 400;
+        letter-spacing: normal;
+        line-height: 24px;
+        text-decoration: none solid rgb(33, 37, 41);
+        text-align: left;
+        text-indent: 0px;
+        text-transform: none;
+        vertical-align: baseline;
+        white-space: normal;
+        word-spacing: 0px;
+    
+        /* Color & Background */
+        background-attachment: scroll;
+        background-color: rgb(237, 237, 233);
+        background-image: none;
+        background-position: 0% 0%;
+        background-repeat: repeat;
+        color: rgb(33, 37, 41);
+    
+        /* Box */
+        height: 76.3958px;
+        width: 100%;
+        border: 0px none rgb(33, 37, 41);
+        margin: 0px;
+        padding: 8px 16px;
+        max-height: none;
+        min-height: 0px;
+        max-width: none;
+        min-width: 0px;
+    
+        /* Positioning */
+        position: sticky;
+        top: 0px;
+        bottom: auto;
+        right: auto;
+        left: auto;
+        float: none;
+        display: flex;
+        clear: none;
+        z-index: 1020;
+    
+        /* List */
+        list-style-image: none;
+        list-style-type: disc;
+        list-style-position: outside;
+    
+        /* Table */
+
+    
+        /* Miscellaneous */
+        overflow: visible;
+        cursor: auto;
+        visibility: visible;
+    
+        /* Effects */
+        transform: none;
+        transition: all 0s ease 0s;
+        outline-offset: 0px;
+        box-sizing: border-box;
+        resize: none;
+        text-shadow: none;
+        text-overflow: clip;
+        word-wrap: normal;
+        box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 2px -2px;
+        display: flex;
+        align-items: center;
+}
+
+
+.navbar-brand{
+        height: 60.3958px;
+        width: 484px;
+        margin: 0px 16px 0px 0px;
+        padding: 5px 0px;
+}
+
+
+.navbar-brand img{
+        height: 50.3958px;
+        width: 217.792px;
+    }
+.btn-custom-color {
+    font-size: large;
+    font-weight: 400;
+    font-family: 'Times New Roman', serif;
+    color: #111010;
+    border-color: #111010;
+}
+.btn {
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 1px solid transparent;
+    margin: 2px;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.btn:not(:disabled):not(.disabled) {
+    cursor: pointer;
+}
+.btn-custom-color {
+    font-size: large;
+    font-weight: 400;
+    font-family: 'Times New Roman', serif;
+    color: #111010;
+    border-color: #111010;
+}
+.desc{
+    margin-top: 80px;
+    text-align: center;
+}
+.row1{
+    border: 1px solid rgb(159, 159, 159);
+    width: 90%;
+    margin: 80px auto;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+.container1{
+    padding: auto;
+    margin-top: 20px;
+}
+#about{
+    background-size: cover; 
+    background-position: center; 
+    width: 100%; 
+    height: 400px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    border-radius: 15px;
+    padding-top: 20px;
+    width: 88%;
+    margin: 80px auto;
+  }
+  h1{
+      text-align: center;
+      color: black;
+      font-weight: bolder;
+      font-family: 'Times New Roman', Times, serif;
+    font-size: 40px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 700;
+    letter-spacing: normal;
+    line-height: 48px;
+    text-decoration: none solid rgb(0, 0, 0);
+    text-align: center;
+
+  }
+  h3{
+      font-weight: lighter;
+      font-size: 200%;
+      margin: 42px auto 4px;
+      /* border: 1px solid black; */
+  }
+  p{
+    /* border: 1px solid red; */
+    width: 45%;
+    margin: 8px auto 12px;
+  }
+  .container{
+      padding: auto;
+      margin-top: 90px;
+  }
+  .row-custom-color {
+      background-color: #212529;
+      color: white;
+  }
+  .row{
+    /* border: 1px solid red; */
+    /* display: flex; */
+  }
+  .mt-5{
+    /* border: 1px solid red; */
+    
+  }
+
+
+.row-div{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    /* border: 1px solid brown; */
+    width: 90%;
+    margin: 50px auto;
+}
+.row-div img{
+    width: 1500px;
+}
+.row-div p{
+    width: 500px;
+    letter-spacing: 1px;
+}
+
+
+.fixed-bottom{
+    position: fixed;
+	bottom: 0px;
+	left: 0px;
+    width: 100%;
+}
