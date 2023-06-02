@@ -3,7 +3,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import generics
 from .serializers import UserSerializer, BatchSerializer, CampaignSerializer, CampaignUserSerializer, GoalSerializer, GoalUserSerializer, MilestoneSerializer, MilestoneUserSerializer
-from .models import Batch
+from .models import Batch , User, Goal, GoalUser, Campaign, CampaignUser, Milestone, MilestoneUser
 from rest_framework.authtoken.models import Token
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
@@ -112,7 +112,7 @@ class CampaignListAPIView(generics.ListAPIView):
 
     def list(self, request, *args, **kwargs):
         user = request.user
-        if user.role != "admin":
+        if user.role != "admin" or user.role != "student":
             return Response("Unauthorized", status=status.HTTP_403_FORBIDDEN)
         return super().list(request, *args, **kwargs)
 
@@ -168,16 +168,6 @@ class CampaignUserListAPIView(generics.ListAPIView):
         return super().list(request, *args, **kwargs)
 
 
-class CampaignUserUpdateAPIView(generics.UpdateAPIView):
-    authentication_classes = [TokenAuthentication]
-    permission_classes = [IsAuthenticated]
-
-    def put(self, request, *args, **kwargs):
-        user = request.user
-        if user.role != "admin":
-            return Response("Unauthorized", status=status.HTTP_403_FORBIDDEN)
-        return self.update(request, *args, **kwargs)
-
 
 class CampaignUserDeleteAPIView(generics.DestroyAPIView):
     authentication_classes = [TokenAuthentication]
@@ -215,7 +205,7 @@ class GoalListAPIView(generics.ListAPIView):
 
     def list(self, request, *args, **kwargs):
         user = request.user
-        if user.role != "admin":
+        if user.role != "admin" or user.role != "student":
             return Response("Unauthorized", status=status.HTTP_403_FORBIDDEN)
         return super().list(request, *args, **kwargs)
 
@@ -226,7 +216,7 @@ class GoalUpdateAPIView(generics.UpdateAPIView):
 
     def put(self, request, *args, **kwargs):
         user = request.user
-        if user.role != "admin":
+        if user.role != "admin" or user.role != "student":
             return Response("Unauthorized", status=status.HTTP_403_FORBIDDEN)
         return self.update(request, *args, **kwargs)
 
@@ -241,8 +231,6 @@ class GoalDeleteAPIView(generics.DestroyAPIView):
             return Response("Unauthorized", status=status.HTTP_403_FORBIDDEN)
         return self.destroy(request, *args, **kwargs)
 
-
-# Similarly, you can define the views for the remaining serializers (, , ) in a similar format.
 
 ## GoalUser
 class GoalUserCreateAPIView(APIView):
@@ -267,6 +255,21 @@ class GoalUserListAPIView(generics.ListAPIView):
     permission_classes = [IsAuthenticated]
     queryset = GoalUser.objects.all()
     serializer_class = GoalUserSerializer
+
+    def get_queryset(self):
+        user_id = self.kwargs['user_id']
+        campaign_id = self.kwargs['campaign_id']
+        print(user_id)
+        print(campaign_id)
+        queryset = GoalUser.objects
+        if user_id and campaign_id:
+          queryset = GoalUser.objects.filter(campaign_user__user_id=user_id, campaign_user__campaign_id=campaign_id)
+        elif user_id:
+          queryset = GoalUser.objects.filter(campaign_user__user_id=user_id)
+        elif campaign_id:
+          queryset = GoalUser.objects.filter(campaign_user__campaign_id=campaign_id)
+
+        return queryset
 
     def list(self, request, *args, **kwargs):
         user = request.user
