@@ -72,7 +72,7 @@ WSGI_APPLICATION = 'pursuital_server.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': config('DATABASE_NAME'),
+        'NAME': "pursuital",
         'USER': config('DATABASE_USER'),
         'PASSWORD': config('DATABASE_PASSWORD'),
         'HOST': config('DATABASE_HOST'),
