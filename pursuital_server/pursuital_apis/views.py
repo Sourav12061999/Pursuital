@@ -203,6 +203,8 @@ class CampaignUserDeleteAPIView(generics.DestroyAPIView):
 
         self.perform_destroy(campaign_user)
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
 ## Goals
 class GoalCreateAPIView(APIView):
     authentication_classes = [TokenAuthentication]
@@ -241,18 +243,23 @@ class GoalUserCreateAPIView(APIView):
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
     
-    def post(self, request):
+    def post(self, request, campaign_user_id, goal_id):
         user = request.user
         if user.role != "admin":
             return Response("Unauthorized", status=status.HTTP_403_FORBIDDEN)
         
-        serializer = GoalUserSerializer(data=request.data)
+        data = {
+            'campaign_user': campaign_user_id,
+            'goal': goal_id,
+            'submission': request.data.get('submission')
+        }
+        
+        serializer = GoalUserSerializer(data=data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
 
 class GoalUserListAPIView(generics.ListAPIView):
     authentication_classes = [TokenAuthentication]
@@ -281,16 +288,6 @@ class GoalUserListAPIView(generics.ListAPIView):
         return super().list(request, *args, **kwargs)
 
 
-class GoalUserUpdateAPIView(generics.UpdateAPIView):
-    authentication_classes = [TokenAuthentication]
-    permission_classes = [IsAuthenticated]
-
-    def put(self, request, *args, **kwargs):
-        user = request.user
-        if user.role != "admin":
-            return Response("Unauthorized", status=status.HTTP_403_FORBIDDEN)
-        return self.update(request, *args, **kwargs)
-
 
 class GoalUserDeleteAPIView(generics.DestroyAPIView):
     authentication_classes = [TokenAuthentication]
@@ -300,8 +297,15 @@ class GoalUserDeleteAPIView(generics.DestroyAPIView):
         user = request.user
         if user.role != "admin":
             return Response("Unauthorized", status=status.HTTP_403_FORBIDDEN)
-        return self.destroy(request, *args, **kwargs)
-
+        
+        goaluserid = self.kwargs.get('goaluserid')
+        try:
+            goaluser = GoalUser.objects.get(id=goaluserid)
+            self.perform_destroy(goaluser)
+        except GoalUser.DoesNotExist:
+            return Response("GoalUser not found", status=status.HTTP_404_NOT_FOUND)
+        
+        return Response("GoalUser deleted successfully", status=status.HTTP_204_NO_CONTENT)
 ## Milestone
 class MilestoneCreateAPIView(APIView):
     authentication_classes = [TokenAuthentication]
@@ -319,64 +323,104 @@ class MilestoneCreateAPIView(APIView):
         
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
 class MilestoneListAPIView(generics.ListAPIView):
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
-    queryset = Milestone.objects.all()
     serializer_class = MilestoneSerializer
 
-    def list(self, request, *args, **kwargs):
-        user = request.user
+    def get_queryset(self):
+        user = self.request.user
         if user.role != "admin":
-            return Response("Unauthorized", status=status.HTTP_403_FORBIDDEN)
-        return super().list(request, *args, **kwargs)
+            return Milestone.objects.none()
+        
+        milestone_id = self.kwargs.get('milestone_id')
+        if milestone_id:
+            queryset = Milestone.objects.filter(id=milestone_id)
+        else:
+            queryset = Milestone.objects.all()
 
+        return queryset
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.get_queryset()
+        serializer = self.serializer_class(queryset, many=True)
+        return self.get_paginated_response(serializer.data) if self.paginate_queryset(queryset) else Response(serializer.data)
 
 class MilestoneUpdateAPIView(generics.UpdateAPIView):
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
 
-    def put(self, request, *args, **kwargs):
+    def put(self, request, milestone_id, *args, **kwargs):
         user = request.user
         if user.role != "admin":
             return Response("Unauthorized", status=status.HTTP_403_FORBIDDEN)
-        return self.update(request, *args, **kwargs)
+
+        instance = self.get_object()
+        serializer = self.get_serializer(instance, data=request.data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        self.perform_update(serializer)
+
+        if getattr(instance, '_prefetched_objects_cache', None):
+            instance._prefetched_objects_cache = {}
+
+        return Response(serializer.data)
 
 
 class MilestoneDeleteAPIView(generics.DestroyAPIView):
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
 
-    def delete(self, request, *args, **kwargs):
+    def delete(self, request, milestone_id, *args, **kwargs):
         user = request.user
         if user.role != "admin":
             return Response("Unauthorized", status=status.HTTP_403_FORBIDDEN)
-        return self.destroy(request, *args, **kwargs)
+
+        instance = self.get_object()
+        self.perform_destroy(instance)
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 ## MilestoneUser
 class MilestoneUserCreateAPIView(APIView):
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
     
-    def post(self, request):
+    def post(self, request, campaign_user_id, milestone_id):
         user = request.user
         if user.role != "admin":
             return Response("Unauthorized", status=status.HTTP_403_FORBIDDEN)
         
-        serializer = MilestoneUserSerializer(data=request.data)
+        data = {
+            'campaign_user': campaign_user_id,
+            'milestone': milestone_id,
+            'submission': request.data.get('submission', '')
+        }
+        
+        serializer = MilestoneUserSerializer(data=data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
 class MilestoneUserListAPIView(generics.ListAPIView):
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
-    queryset = MilestoneUser.objects.all()
     serializer_class = MilestoneUserSerializer
+
+    def get_queryset(self):
+        milestone_id = self.request.query_params.get('milestone_id')
+        campaign_user_id = self.request.query_params.get('campaignuser_id')
+
+        if milestone_id and campaign_user_id:
+            queryset = MilestoneUser.objects.filter(milestone_id=milestone_id, campaign_user_id=campaign_user_id)
+        elif milestone_id:
+            queryset = MilestoneUser.objects.filter(milestone_id=milestone_id)
+        elif campaign_user_id:
+            queryset = MilestoneUser.objects.filter(campaign_user_id=campaign_user_id)
+        else:
+            queryset = MilestoneUser.objects.all()
+
+        return queryset
 
     def list(self, request, *args, **kwargs):
         user = request.user
@@ -384,24 +428,19 @@ class MilestoneUserListAPIView(generics.ListAPIView):
             return Response("Unauthorized", status=status.HTTP_403_FORBIDDEN)
         return super().list(request, *args, **kwargs)
 
-
-class MilestoneUserUpdateAPIView(generics.UpdateAPIView):
-    authentication_classes = [TokenAuthentication]
-    permission_classes = [IsAuthenticated]
-
-    def put(self, request, *args, **kwargs):
-        user = request.user
-        if user.role != "admin":
-            return Response("Unauthorized", status=status.HTTP_403_FORBIDDEN)
-        return self.update(request, *args, **kwargs)
-
-
 class MilestoneUserDeleteAPIView(generics.DestroyAPIView):
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
 
-    def delete(self, request, *args, **kwargs):
+    def delete(self, request, milestone_user_id):
         user = request.user
         if user.role != "admin":
             return Response("Unauthorized", status=status.HTTP_403_FORBIDDEN)
-        return self.destroy(request, *args, **kwargs)
+        
+        try:
+            milestone_user = MilestoneUser.objects.get(id=milestone_user_id)
+        except MilestoneUser.DoesNotExist:
+            return Response("Milestone User not found", status=status.HTTP_404_NOT_FOUND)
+        
+        milestone_user.delete()
+        return Response("Milestone User deleted successfully", status=status.HTTP_204_NO_CONTENT)

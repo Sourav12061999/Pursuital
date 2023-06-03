@@ -70,6 +70,7 @@ class GoalUser(models.Model):
 
     def __str__(self):
         return f'id:{self.id}, campaign_user: {self.campaign_user}. goal:{self.goal}, submission: {self.submission}'
+
 class Milestone(models.Model):
     name = models.CharField(max_length=255)
     goal_count = models.IntegerField()

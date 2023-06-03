@@ -6,5 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./signup.component.css'],
 })
 export class SignupComponent {
-  submitForm() {}
+  submitForm() {
+    console.log("Hello signup form")
+  }
 }
