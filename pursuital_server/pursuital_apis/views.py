@@ -288,6 +288,7 @@ class GoalUserListAPIView(generics.ListAPIView):
         return super().list(request, *args, **kwargs)
 
 
+
 class GoalUserDeleteAPIView(generics.DestroyAPIView):
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
@@ -296,8 +297,15 @@ class GoalUserDeleteAPIView(generics.DestroyAPIView):
         user = request.user
         if user.role != "admin":
             return Response("Unauthorized", status=status.HTTP_403_FORBIDDEN)
-        return self.destroy(request, *args, **kwargs)
-
+        
+        goaluserid = self.kwargs.get('goaluserid')
+        try:
+            goaluser = GoalUser.objects.get(id=goaluserid)
+            self.perform_destroy(goaluser)
+        except GoalUser.DoesNotExist:
+            return Response("GoalUser not found", status=status.HTTP_404_NOT_FOUND)
+        
+        return Response("GoalUser deleted successfully", status=status.HTTP_204_NO_CONTENT)
 ## Milestone
 class MilestoneCreateAPIView(APIView):
     authentication_classes = [TokenAuthentication]

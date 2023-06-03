@@ -23,9 +23,8 @@ urlpatterns = [
     path('goals/create/', GoalCreateAPIView.as_view(), name="goals-create"),
     path('goals/list/<int:goal_id>/', GoalListAPIView.as_view(), name="goals-list"),
     # GoalUser routes
-    path('goals-users/create/', GoalUserCreateAPIView.as_view(), name="goal-user-create"),
     path('goals-users/list/', GoalUserListAPIView.as_view(), name="goal-user-list"),
-    path('goals-users/delete/', GoalUserDeleteAPIView.as_view(), name="goal-user-delete"),
+    path('goals-users/delete/<int:goaluserid>/', GoalUserDeleteAPIView.as_view(), name="goal-user-delete"),
     path('goals-users/create/<int:campaign_user_id>/<int:goal_id>/',GoalUserCreateAPIView.as_view(), name="goal-user-create"),
     # Milestone routes
     path('milestones/create/', MilestoneCreateAPIView.as_view(), name="milestone-create"),

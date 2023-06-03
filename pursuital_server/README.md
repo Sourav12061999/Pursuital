@@ -62,3 +62,12 @@
 - `api/campaigns-users/create`(POST):- Create a new Campaign User
 - `api/campaigns-users/list/<int:campaign_id>/`(GET) -> Get all the Campaign Users of a perticular campaign
 - `api/campaigns-users/delete/<int:user_id>/<int:campaign_id>/`(Delete):- Delete a CampaignUser which is of a User and belongs to a Campaign
+#### Goals:- 
+- `api/goals/create/`(POST):- Create a goal
+- `api/goals/list/<int:goal_id>/`(GET):- Return a goal by its id
+#### Goal User:-
+- `api/goals-users/create/`(POST):- Create a GoalUser
+- `api/goals-users/list/`(GET):- It can take `user_id` and `campaign_id` as query params(Both Optional) and return the filtered
+- `api/goals-users/delete/<int:goaluserid>/`(Delete):- delete the goaluser
+
+*** This same format of Goals and GoalUser is followed for Milestone and MilestoneUsers ***
