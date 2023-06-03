@@ -1,1 +1,15 @@
+
 /* You can add global styles to this file, and also import other style files */
+ /* @import "tailwindcss/tailwind.css";  */
+/* @import "tailwindcss/utilities/all";  */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* @tailwind base;
+@tailwind components;
+@tailwind utilities; */
+
+/* body {
+    background-image: url("https://static.asianpaints.com/content/dam/asian_paints/fabric-pages/detail-pages/zoomed-in/pure-royale/AAA2017ESS14104901.jpeg");
+} */

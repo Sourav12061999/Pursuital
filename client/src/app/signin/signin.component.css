@@ -1,0 +1,51 @@
+
+.container{
+    width: 100%;
+    /* border: 1px solid red; */
+}
+.nav-bg-light{
+    justify-content: center;
+      /* box-shadow: 0 4px 2px -2px rgba(0,0,0,.2); */
+	margin-left: 610px;
+	margin-top: 10px;
+    }	
+
+    body {
+      /* background-image: url("https://img.freepik.com/premium-photo/watercolor-background-grey-watercolour-painting-textured-design-white-paper-background_7190-3250.jpg"); */
+      background-size: cover;
+    }
+	.btn-custom-color {
+    font-size: large;
+    font-family: 'Times New Roman', serif;
+    color: #111010;
+    border-color: #111010;
+    }
+
+	
+        /* button hover css  */
+    .btn-custom-color:hover {
+    background-color: rgb(157, 155, 155);
+    color: black;
+    border-color: black;
+    }
+	
+	
+	
+
+	 /* footer css */
+	 .row-custom-color {
+            background-color: #212529;
+            color: white;
+			height: 40px
+    }
+    .create-new {
+         background-color: lightgray;
+         color: white;
+      
+    }
+	.required-field {
+	color: red;
+	margin-left: 5px;
+	}
+
+    

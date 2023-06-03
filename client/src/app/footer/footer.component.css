@@ -1,0 +1,26 @@
+.row-div{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 90%;
+    margin: 50px auto;
+}
+.row-div img{
+    width: 1500px;
+}
+.row-div p{
+    width: 500px;
+    letter-spacing: 1px;
+}
+.row-custom-color {
+    background-color: #212529;
+    color: white;
+}
+
+
+.fixed-bottom{
+    position: fixed;
+	bottom: 0px;
+	left: 0px;
+    width: 100%;
+}
