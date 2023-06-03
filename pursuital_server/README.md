@@ -45,7 +45,7 @@
   ```
 *** Other than signup and signin all apis will be authenticated ***
 #### User:- 
-- `api/user/`(POST):- Get User Details
+- `api/user/`(GET):- Get User Details
   1. In the Header put a key called `Authorization`
   2. The value will be `Token <Your Token the you get after signin>`
   3. `<Your Token the you get after signin>` make sure to replace this part with the acctual token
