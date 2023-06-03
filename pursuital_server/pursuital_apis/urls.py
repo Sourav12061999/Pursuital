@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import UserDetailView, BatchCreateAPIView, BatchListAPIView, SignupView, SigninView, CampaignCreateAPIView, CampaignListAPIView, CampaignUpdateAPIView, CampaignDeleteAPIView, CampaignUserCreateAPIView, CampaignUserListAPIView, CampaignUserDeleteAPIView, GoalCreateAPIView, GoalListAPIView, GoalUpdateAPIView, GoalDeleteAPIView, GoalUserCreateAPIView, GoalUserListAPIView, GoalUserUpdateAPIView, GoalUserDeleteAPIView, MilestoneCreateAPIView, MilestoneListAPIView, MilestoneUpdateAPIView, MilestoneDeleteAPIView, MilestoneUserCreateAPIView, MilestoneUserListAPIView, MilestoneUserUpdateAPIView, MilestoneUserDeleteAPIView
+from .views import UserDetailView, BatchCreateAPIView, BatchListAPIView, SignupView, SigninView, CampaignCreateAPIView, CampaignListAPIView, CampaignUpdateAPIView, CampaignDeleteAPIView, CampaignUserCreateAPIView, CampaignUserListAPIView, CampaignUserDeleteAPIView, GoalCreateAPIView, GoalListAPIView, GoalUserCreateAPIView, GoalUserListAPIView, GoalUserUpdateAPIView, GoalUserDeleteAPIView, MilestoneCreateAPIView, MilestoneListAPIView, MilestoneUpdateAPIView, MilestoneDeleteAPIView, MilestoneUserCreateAPIView, MilestoneUserListAPIView, MilestoneUserUpdateAPIView, MilestoneUserDeleteAPIView
 
 
 
